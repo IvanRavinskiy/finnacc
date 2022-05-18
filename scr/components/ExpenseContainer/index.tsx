@@ -1,8 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {ComponentType, FC, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 type ExpenseContainerPropsType = {
-  children: any;
+  children: ComponentType;
 };
 
 export const ExpenseContainer: FC<ExpenseContainerPropsType> = ({children}) => {
