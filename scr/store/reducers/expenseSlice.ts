@@ -1,6 +1,13 @@
-import {DataTypes} from '../types/dataTypes';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-export const data: DataTypes[] = [
+export type FbAuthType = {
+  id: string;
+  date: string;
+  title: string;
+  value: number;
+};
+
+const initialState: FbAuthType[] = [
   {id: '1', date: '11/02/2022', title: 'car', value: 23},
   {id: '2', date: '21/03/2022', title: 'food', value: 987},
   {id: '3', date: '22/03/2022', title: 'food', value: 232},
@@ -14,3 +21,15 @@ export const data: DataTypes[] = [
   {id: '11', date: '11/05/2022', title: 'clothes', value: 34},
   {id: '12', date: '22/02/2022', title: 'clothes', value: 54},
 ];
+
+export const expenseSlice = createSlice({
+  name: 'expense',
+  initialState,
+  reducers: {
+    deleteItem: (state: FbAuthType[], action: PayloadAction<string>) => {
+      state.filter(i => i.id !== action.payload);
+    },
+  },
+});
+
+export const {deleteItem} = expenseSlice.actions;

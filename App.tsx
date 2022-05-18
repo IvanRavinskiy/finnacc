@@ -1,13 +1,15 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {Home} from './scr/screens/HomeScreen';
+import {Provider} from 'react-redux';
+import {store} from './scr/store';
 
 export const App = () => {
   return (
-    <SafeAreaView>
-      <Home />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView>
+        <Home />
+      </SafeAreaView>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({});
