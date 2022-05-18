@@ -1,0 +1,1 @@
+export {expenseSlice} from './expenseSlice';

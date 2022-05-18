@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import {expenseSlice} from './reducers/expenseSlice';
+import {expenseSlice} from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
