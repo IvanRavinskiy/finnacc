@@ -5,14 +5,14 @@ import {SvgPlus} from '../../assets/svg/SvgPlus';
 import {homeStyles} from './style';
 import {Expense} from '../../components/Expense';
 import {useSelector} from 'react-redux';
-import {RootStateType} from '../../store';
+import {selectExpenseData} from '../../store/selectors';
 
 export const Home = () => {
-  const data = useSelector((state: RootStateType) => state.expense);
+  const expenseData = useSelector(selectExpenseData);
   return (
     <ScrollView>
       <Header />
-      {data.map(d => {
+      {expenseData.map(d => {
         return (
           <Expense
             key={d.id}
