@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
+import {useDispatch} from 'react-redux';
+import {addItem} from '../../store/reducers/expenseSlice';
 
 export const ExpenseHandling = () => {
+  const dispatch = useDispatch();
   const [date, setDate] = useState('');
   const [title, setTitle] = useState('');
-  const [value, setValue] = useState('');
+  const [valueStr, setValue] = useState('');
 
   const onChangeDate = (newText: string) => {
     setDate(newText);
@@ -14,11 +17,16 @@ export const ExpenseHandling = () => {
     setTitle(newText);
   };
   const onChangeValue = (newText: string) => {
-    setValue(newText);
+    const numericRegex = /^([0-9]{1,100})+$/;
+    if (numericRegex.test(newText)) {
+      setValue(newText);
+    }
   };
 
   const onSetItemPress = () => {
-    console.log(date, ' ', title, ' ', value);
+    const id = `${date}${title}${valueStr}`;
+    const value = Number(valueStr);
+    dispatch(addItem({id, date, title, value}));
     setDate('');
     setTitle('');
     setValue('');
@@ -40,9 +48,10 @@ export const ExpenseHandling = () => {
       />
       <TextInput
         style={expenseHandlingStyles.input}
+        keyboardType="numeric"
         placeholder="Add value"
         onChangeText={onChangeValue}
-        defaultValue={value}
+        defaultValue={valueStr}
       />
       <TouchableOpacity onPress={onSetItemPress}>
         <Text>OK</Text>

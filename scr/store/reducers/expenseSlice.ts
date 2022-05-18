@@ -26,6 +26,17 @@ export const expenseSlice = createSlice({
   name: 'expense',
   initialState,
   reducers: {
+    addItem: (state: FbAuthType[], action: PayloadAction<FbAuthType>) => {
+      return [
+        {
+          id: action.payload.id,
+          date: action.payload.date,
+          value: action.payload.value,
+          title: action.payload.title,
+        },
+        ...state,
+      ];
+    },
     deleteItem: (state: FbAuthType[], action: PayloadAction<string>) => {
       state = state.filter(i => i.id !== action.payload);
       return state;
@@ -33,4 +44,4 @@ export const expenseSlice = createSlice({
   },
 });
 
-export const {deleteItem} = expenseSlice.actions;
+export const {deleteItem, addItem} = expenseSlice.actions;
