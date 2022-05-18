@@ -1,6 +1,5 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {Header} from '../../components/Header';
 import {SvgPlus} from '../../assets/svg/SvgPlus';
 import {homeStyles} from './style';
 import {Expense} from '../../components/Expense';
@@ -11,7 +10,6 @@ export const Home = () => {
   const expenseData = useSelector(selectExpenseData);
   return (
     <ScrollView>
-      <Header />
       {expenseData.map(d => {
         return (
           <Expense
