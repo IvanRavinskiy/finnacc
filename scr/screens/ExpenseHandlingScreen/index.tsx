@@ -3,6 +3,7 @@ import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
 import {addItem} from '../../store/reducers/expenseSlice';
+import {Header} from '../../components/Header';
 
 export const ExpenseHandling = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const ExpenseHandling = () => {
 
   return (
     <View>
+      <Header />
       <TextInput
         style={expenseHandlingStyles.input}
         placeholder="Add date"
