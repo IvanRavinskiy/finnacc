@@ -7,12 +7,17 @@ import {useSelector} from 'react-redux';
 import {selectExpenseData} from '../../store/selectors';
 import {Header} from '../../components/Header';
 import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigation/type';
+import {Screen} from '../../enums/Screen';
+
+type HomeProp = StackNavigationProp<RootStackParamList>;
 
 export const Home = () => {
   const expenseData = useSelector(selectExpenseData);
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<HomeProp>();
   const onAddItemPress = () => {
-    navigation.navigate('ExpenseHandling');
+    navigation.navigate(Screen.ExpenseHandling);
   };
 
   return (

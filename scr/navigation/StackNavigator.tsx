@@ -2,17 +2,19 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home} from '../screens/HomeScreen';
 import {ExpenseHandling} from '../screens/ExpenseHandlingScreen';
+import {RootStackParamList} from './type';
+import {Screen} from '../enums/Screen';
 
 export const StackNavigator = () => {
-  const Stack = createNativeStackNavigator<any>();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={'Home'} component={Home} />
-      <Stack.Screen name={'ExpenseHandling'} component={ExpenseHandling} />
+      <Stack.Screen name={Screen.Home} component={Home} />
+      <Stack.Screen name={Screen.ExpenseHandling} component={ExpenseHandling} />
     </Stack.Navigator>
   );
 };
