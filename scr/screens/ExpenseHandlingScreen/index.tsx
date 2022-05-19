@@ -25,12 +25,14 @@ export const ExpenseHandling = () => {
   };
 
   const onSetItemPress = () => {
-    const id = `${date}${title}${valueStr}`;
-    const value = Number(valueStr);
-    dispatch(addItem({id, date, title, value}));
-    setDate('');
-    setTitle('');
-    setValue('');
+    if (date.length !== 0 && title.length !== 0 && valueStr.length !== 0) {
+      const id = `${date}${title}${valueStr}`;
+      const value = Number(valueStr);
+      dispatch(addItem({id, date, title, value}));
+      setDate('');
+      setTitle('');
+      setValue('');
+    }
   };
 
   return (
@@ -38,20 +40,20 @@ export const ExpenseHandling = () => {
       <Header />
       <TextInput
         style={expenseHandlingStyles.input}
-        placeholder="Add date"
+        placeholder="Require date"
         onChangeText={onChangeDate}
         defaultValue={date}
       />
       <TextInput
         style={expenseHandlingStyles.input}
-        placeholder="Add title"
+        placeholder="Require title"
         onChangeText={onChangeTitle}
         defaultValue={title}
       />
       <TextInput
         style={expenseHandlingStyles.input}
         keyboardType="numeric"
-        placeholder="Add value"
+        placeholder="Require value"
         onChangeText={onChangeValue}
         defaultValue={valueStr}
       />
