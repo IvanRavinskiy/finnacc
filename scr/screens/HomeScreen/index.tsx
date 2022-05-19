@@ -8,7 +8,7 @@ import {selectExpenseData} from '../../store/selectors';
 import {Header} from '../../components/Header';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from '../../enums/Screen';
-import {HomeNavigationProp} from './type';
+import type {HomeNavigationProp} from './type';
 
 export const Home = () => {
   const expenseData = useSelector(selectExpenseData);
