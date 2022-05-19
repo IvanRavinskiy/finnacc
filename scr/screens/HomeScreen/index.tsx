@@ -6,9 +6,15 @@ import {Expense} from '../../components/Expense';
 import {useSelector} from 'react-redux';
 import {selectExpenseData} from '../../store/selectors';
 import {Header} from '../../components/Header';
+import {useNavigation} from '@react-navigation/native';
 
 export const Home = () => {
   const expenseData = useSelector(selectExpenseData);
+  const navigation = useNavigation<any>();
+  const onAddItemPress = () => {
+    navigation.navigate('ExpenseHandling');
+  };
+
   return (
     <View>
       <Header />
@@ -25,7 +31,7 @@ export const Home = () => {
           );
         })}
         <View style={homeStyles.svgContainer}>
-          <SvgPlus />
+          <SvgPlus onPress={onAddItemPress} />
         </View>
       </ScrollView>
     </View>
