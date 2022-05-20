@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {Header} from '../../components/Header';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
 import {addItem, refactorItem} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
+import {HeaderContainer} from '../../components/HeaderContainer';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -52,30 +52,31 @@ export const ExpenseHandling = ({route}: Props) => {
   };
 
   return (
-    <View>
-      <Header />
-      <TextInput
-        style={expenseHandlingStyles.input}
-        placeholder={'Require date'}
-        onChangeText={onChangeDate}
-        defaultValue={date}
-      />
-      <TextInput
-        style={expenseHandlingStyles.input}
-        placeholder={'Require title'}
-        onChangeText={onChangeTitle}
-        defaultValue={title}
-      />
-      <TextInput
-        style={expenseHandlingStyles.input}
-        keyboardType={'numeric'}
-        placeholder={'Require value'}
-        onChangeText={onChangeValue}
-        defaultValue={value}
-      />
-      <TouchableOpacity onPress={onSetItemPress}>
-        <Text>OK</Text>
-      </TouchableOpacity>
-    </View>
+    <HeaderContainer>
+      <View>
+        <TextInput
+          style={expenseHandlingStyles.input}
+          placeholder={'Require date'}
+          onChangeText={onChangeDate}
+          defaultValue={date}
+        />
+        <TextInput
+          style={expenseHandlingStyles.input}
+          placeholder={'Require title'}
+          onChangeText={onChangeTitle}
+          defaultValue={title}
+        />
+        <TextInput
+          style={expenseHandlingStyles.input}
+          keyboardType={'numeric'}
+          placeholder={'Require value'}
+          onChangeText={onChangeValue}
+          defaultValue={value}
+        />
+        <TouchableOpacity onPress={onSetItemPress}>
+          <Text>OK</Text>
+        </TouchableOpacity>
+      </View>
+    </HeaderContainer>
   );
 };
