@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
@@ -6,7 +6,7 @@ import {addItem, refactorItem} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
-import {isFormNotEmpty} from '../../utils/isFormNotEmpty';
+import {isFormNotEmpty, isValueFormHasNumber, useInputValue} from '../../utils';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -14,25 +14,29 @@ export const ExpenseHandling = ({route}: Props) => {
 
   const dispatch = useDispatch();
 
-  const [date, setDate] = useState(params.date);
-  const [title, setTitle] = useState(params.title);
-  const [value, setValue] = useState(params.value);
+  // const [date, setDate, onChangeDate] = useInputValue(params.date);
+  // const [title, setTitle, onChangeTitle] = useInputValue(params.date);
+  // const [value, setValue, onChangeValue] = useInputValue(params.date, () =>
+  //     isValueFormHasNumber(value),
+  // );
 
-  const onChangeDate = (newText: string) => {
-    setDate(newText);
-  };
+  const {
+    inputValue: date,
+    setInputValue: setDate,
+    onChangeInputValue: onChangeDate,
+  } = useInputValue(params.date);
 
-  const onChangeTitle = (newText: string) => {
-    setTitle(newText);
-  };
+  const {
+    inputValue: title,
+    setInputValue: setTitle,
+    onChangeInputValue: onChangeTitle,
+  } = useInputValue(params.title);
 
-  const onChangeValue = (newText: string) => {
-    const numericRegex = /^([0-9]{1,100})+$/;
-
-    if (numericRegex.test(newText)) {
-      setValue(newText);
-    }
-  };
+  const {
+    inputValue: value,
+    setInputValue: setValue,
+    onChangeInputValue: onChangeValue,
+  } = useInputValue(params.value, isValueFormHasNumber);
 
   const onSetItemPress = () => {
     if (params.modal === 'refactor') {
@@ -46,6 +50,8 @@ export const ExpenseHandling = ({route}: Props) => {
         setValue('');
 
         navigation.goBack();
+      } else {
+        console.log('onSetItemPress refactor error');
       }
     }
     if (params.modal === 'add') {
@@ -57,6 +63,8 @@ export const ExpenseHandling = ({route}: Props) => {
         setDate('');
         setTitle('');
         setValue('');
+      } else {
+        console.log('onSetItemPress add error');
       }
     }
   };
