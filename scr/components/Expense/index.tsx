@@ -31,6 +31,7 @@ export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
       title,
       value,
     });
+    setView(false);
   };
 
   return (
