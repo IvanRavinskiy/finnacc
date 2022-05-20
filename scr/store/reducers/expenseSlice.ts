@@ -27,30 +27,18 @@ export const expenseSlice = createSlice({
   initialState,
   reducers: {
     refactorItem: (state: FbAuthType[], action: PayloadAction<FbAuthType>) => {
-      return state.map(i =>
-        i.id === action.payload.id
-          ? {
-              ...i,
-              date: action.payload.date,
-              value: action.payload.value,
-              title: action.payload.title,
-            }
-          : i,
-      );
+      const {title, value, id, date} = action.payload;
+
+      return state.map(i => (i.id === id ? {...i, date, value, title} : i));
     },
     addItem: (state: FbAuthType[], action: PayloadAction<FbAuthType>) => {
-      return [
-        {
-          id: action.payload.id,
-          date: action.payload.date,
-          value: action.payload.value,
-          title: action.payload.title,
-        },
-        ...state,
-      ];
+      const {title, value, id, date} = action.payload;
+
+      return [{id, date, value, title}, ...state];
     },
     deleteItem: (state: FbAuthType[], action: PayloadAction<string>) => {
       state = state.filter(i => i.id !== action.payload);
+
       return state;
     },
   },
