@@ -4,13 +4,8 @@ import {Header} from '../../components/Header';
 import {expenseHandlingStyles} from '../ExpenseHandlingScreen/style';
 import {useDispatch} from 'react-redux';
 import {refactorItem} from '../../store/reducers/expenseSlice';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../navigation/type';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-
-type Props = NativeStackScreenProps<RootStackParamList, 'ExpenseRefactor'>;
-type HomeNavigationProp = StackNavigationProp<RootStackParamList>;
+import {HomeNavigationProp, Props} from './type';
 
 export const ExpenseRefactor = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
