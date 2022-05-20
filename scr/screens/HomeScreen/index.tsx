@@ -11,8 +11,10 @@ import type {HomeNavigationProp} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
 
 export const Home = () => {
-  const expenseData = useSelector(selectExpenseData);
   const navigation = useNavigation<HomeNavigationProp>();
+
+  const expenseData = useSelector(selectExpenseData);
+
   const onAddItemPress = () => {
     navigation.navigate(Screen.ExpenseHandling, {
       modal: 'add',
@@ -26,17 +28,14 @@ export const Home = () => {
   return (
     <HeaderContainer>
       <ScrollView>
-        {expenseData.map(d => {
+        {expenseData.map(expenseItem => {
+          const {title, value, date, id} = expenseItem;
+
           return (
-            <Expense
-              key={d.id}
-              id={d.id}
-              date={d.date}
-              title={d.title}
-              value={d.value}
-            />
+            <Expense key={id} id={id} date={date} title={title} value={value} />
           );
         })}
+
         <View style={homeStyles.svgContainer}>
           <SvgPlus onPress={onAddItemPress} />
         </View>
