@@ -45,10 +45,6 @@ export const ExpenseHandling = ({route}: Props) => {
 
         dispatch(refactorItem({id, date, title, value}));
 
-        setDate('');
-        setTitle('');
-        setValue('');
-
         navigation.goBack();
       } else {
         console.log('onSetItemPress refactor error');
