@@ -10,6 +10,7 @@ import {HomeNavigationProp, Props} from './type';
 export const ExpenseRefactor = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
   const {params} = route;
+
   const dispatch = useDispatch();
   const [date, setDate] = useState(params.date);
   const [title, setTitle] = useState(params.title);
@@ -44,20 +45,20 @@ export const ExpenseRefactor = ({route}: Props) => {
       <Header />
       <TextInput
         style={expenseHandlingStyles.input}
-        placeholder="Require date"
+        placeholder={'Require date'}
         onChangeText={onChangeDate}
         defaultValue={date}
       />
       <TextInput
         style={expenseHandlingStyles.input}
-        placeholder="Require title"
+        placeholder={'Require title'}
         onChangeText={onChangeTitle}
         defaultValue={title}
       />
       <TextInput
         style={expenseHandlingStyles.input}
-        keyboardType="numeric"
-        placeholder="Require value"
+        keyboardType={'numeric'}
+        placeholder={'Require value'}
         onChangeText={onChangeValue}
         defaultValue={value}
       />
