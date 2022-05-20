@@ -6,12 +6,14 @@ import {addItem, refactorItem} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
+import {isFormNotEmpty} from '../../utils/isFormNotEmpty';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
   const {params} = route;
 
   const dispatch = useDispatch();
+
   const [date, setDate] = useState(params.date);
   const [title, setTitle] = useState(params.title);
   const [value, setValue] = useState(params.value);
@@ -19,11 +21,14 @@ export const ExpenseHandling = ({route}: Props) => {
   const onChangeDate = (newText: string) => {
     setDate(newText);
   };
+
   const onChangeTitle = (newText: string) => {
     setTitle(newText);
   };
+
   const onChangeValue = (newText: string) => {
     const numericRegex = /^([0-9]{1,100})+$/;
+
     if (numericRegex.test(newText)) {
       setValue(newText);
     }
@@ -31,19 +36,24 @@ export const ExpenseHandling = ({route}: Props) => {
 
   const onSetItemPress = () => {
     if (params.modal === 'refactor') {
-      if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
+      if (isFormNotEmpty(date, title, value)) {
         const id = params.id;
+
         dispatch(refactorItem({id, date, title, value}));
+
         setDate('');
         setTitle('');
         setValue('');
+
         navigation.goBack();
       }
     }
     if (params.modal === 'add') {
-      if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
+      if (isFormNotEmpty(date, title, value)) {
         const id = `${date}${title}${value}`;
+
         dispatch(addItem({id, date, title, value}));
+
         setDate('');
         setTitle('');
         setValue('');
@@ -56,25 +66,26 @@ export const ExpenseHandling = ({route}: Props) => {
       <View>
         <TextInput
           style={expenseHandlingStyles.input}
-          placeholder={'Require date'}
+          placeholder="Require date"
           onChangeText={onChangeDate}
           defaultValue={date}
         />
         <TextInput
           style={expenseHandlingStyles.input}
-          placeholder={'Require title'}
+          placeholder="Require title"
           onChangeText={onChangeTitle}
           defaultValue={title}
         />
         <TextInput
           style={expenseHandlingStyles.input}
-          keyboardType={'numeric'}
-          placeholder={'Require value'}
+          keyboardType="numeric"
+          placeholder="Require value"
           onChangeText={onChangeValue}
           defaultValue={value}
         />
+
         <TouchableOpacity onPress={onSetItemPress}>
-          <Text>OK</Text>
+          <Text>{'OK'}</Text>
         </TouchableOpacity>
       </View>
     </HeaderContainer>
