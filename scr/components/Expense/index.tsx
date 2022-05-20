@@ -3,22 +3,34 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {deleteItem} from '../../store/reducers/expenseSlice';
 import {expenseStyles} from './style';
+import {Screen} from '../../enums/Screen';
+import {useNavigation} from '@react-navigation/native';
+import {HomeNavigationProp} from '../../screens/HomeScreen/type';
 
 export type ExpensePropsType = {
   id: string;
   date: string;
   title: string;
-  value: number;
+  value: string;
 };
 
 export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
   const [view, setView] = useState(false);
+  const navigation = useNavigation<HomeNavigationProp>();
   const dispatch = useDispatch();
   const onShowControlPress = () => {
     setView(!view);
   };
   const onDeleteItemPress = () => {
     dispatch(deleteItem(id));
+  };
+  const onRefactorItemPress = () => {
+    navigation.navigate(Screen.ExpenseRefactor, {
+      id,
+      date,
+      title,
+      value,
+    });
   };
 
   return (
@@ -31,7 +43,7 @@ export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
         </View>
       </TouchableOpacity>
       {view && (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onRefactorItemPress}>
           <Text>Refactor</Text>
         </TouchableOpacity>
       )}

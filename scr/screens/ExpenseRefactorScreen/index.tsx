@@ -1,15 +1,24 @@
 import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {expenseHandlingStyles} from './style';
-import {useDispatch} from 'react-redux';
-import {addItem} from '../../store/reducers/expenseSlice';
 import {Header} from '../../components/Header';
+import {expenseHandlingStyles} from '../ExpenseHandlingScreen/style';
+import {useDispatch} from 'react-redux';
+import {refactorItem} from '../../store/reducers/expenseSlice';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigation/type';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 
-export const ExpenseHandling = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'ExpenseRefactor'>;
+type HomeNavigationProp = StackNavigationProp<RootStackParamList>;
+
+export const ExpenseRefactor = ({route}: Props) => {
+  const navigation = useNavigation<HomeNavigationProp>();
+  const {params} = route;
   const dispatch = useDispatch();
-  const [date, setDate] = useState('');
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState('');
+  const [date, setDate] = useState(params.date);
+  const [title, setTitle] = useState(params.title);
+  const [value, setValue] = useState(params.value);
 
   const onChangeDate = (newText: string) => {
     setDate(newText);
@@ -26,11 +35,12 @@ export const ExpenseHandling = () => {
 
   const onSetItemPress = () => {
     if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
-      const id = `${date}${title}${value}`;
-      dispatch(addItem({id, date, title, value}));
+      const id = params.id;
+      dispatch(refactorItem({id, date, title, value}));
       setDate('');
       setTitle('');
       setValue('');
+      navigation.goBack();
     }
   };
 
