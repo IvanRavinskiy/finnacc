@@ -1,15 +1,20 @@
 import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Header} from '../../components/Header';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
-import {addItem} from '../../store/reducers/expenseSlice';
-import {Header} from '../../components/Header';
+import {addItem, refactorItem} from '../../store/reducers/expenseSlice';
+import {useNavigation} from '@react-navigation/native';
+import {HomeNavigationProp, Props} from './type';
 
-export const ExpenseHandling = () => {
+export const ExpenseHandling = ({route}: Props) => {
+  const navigation = useNavigation<HomeNavigationProp>();
+  const {params} = route;
+
   const dispatch = useDispatch();
-  const [date, setDate] = useState('');
-  const [title, setTitle] = useState('');
-  const [value, setValue] = useState('');
+  const [date, setDate] = useState(params.date);
+  const [title, setTitle] = useState(params.title);
+  const [value, setValue] = useState(params.value);
 
   const onChangeDate = (newText: string) => {
     setDate(newText);
@@ -25,12 +30,24 @@ export const ExpenseHandling = () => {
   };
 
   const onSetItemPress = () => {
-    if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
-      const id = `${date}${title}${value}`;
-      dispatch(addItem({id, date, title, value}));
-      setDate('');
-      setTitle('');
-      setValue('');
+    if (params.modal === 'refactor') {
+      if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
+        const id = params.id;
+        dispatch(refactorItem({id, date, title, value}));
+        setDate('');
+        setTitle('');
+        setValue('');
+        navigation.goBack();
+      }
+    }
+    if (params.modal === 'add') {
+      if (date.length !== 0 && title.length !== 0 && value.length !== 0) {
+        const id = `${date}${title}${value}`;
+        dispatch(addItem({id, date, title, value}));
+        setDate('');
+        setTitle('');
+        setValue('');
+      }
     }
   };
 

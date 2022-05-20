@@ -4,6 +4,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 export type Props = NativeStackScreenProps<
   RootStackParamList,
-  'ExpenseRefactor'
+  'ExpenseHandling'
 >;
 export type HomeNavigationProp = StackNavigationProp<RootStackParamList>;

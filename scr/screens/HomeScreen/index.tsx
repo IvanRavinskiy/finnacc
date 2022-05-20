@@ -14,7 +14,13 @@ export const Home = () => {
   const expenseData = useSelector(selectExpenseData);
   const navigation = useNavigation<HomeNavigationProp>();
   const onAddItemPress = () => {
-    navigation.navigate(Screen.ExpenseHandling);
+    navigation.navigate(Screen.ExpenseHandling, {
+      modal: 'add',
+      title: '',
+      value: '',
+      date: '',
+      id: '',
+    });
   };
 
   return (

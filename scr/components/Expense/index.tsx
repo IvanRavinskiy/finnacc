@@ -25,7 +25,8 @@ export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
     dispatch(deleteItem(id));
   };
   const onRefactorItemPress = () => {
-    navigation.navigate(Screen.ExpenseRefactor, {
+    navigation.navigate(Screen.ExpenseHandling, {
+      modal: 'refactor',
       id,
       date,
       title,
