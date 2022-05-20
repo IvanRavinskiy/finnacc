@@ -6,24 +6,25 @@ import {expenseStyles} from './style';
 import {Screen} from '../../enums/Screen';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp} from '../../screens/HomeScreen/type';
+import {ExpensePropsType} from './type';
 
-export type ExpensePropsType = {
-  id: string;
-  date: string;
-  title: string;
-  value: string;
-};
+export const Expense: FC<ExpensePropsType> = props => {
+  const {id, date, title, value} = props;
 
-export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
   const [view, setView] = useState(false);
+
   const navigation = useNavigation<HomeNavigationProp>();
+
   const dispatch = useDispatch();
+
   const onShowControlPress = () => {
     setView(!view);
   };
+
   const onDeleteItemPress = () => {
     dispatch(deleteItem(id));
   };
+
   const onRefactorItemPress = () => {
     navigation.navigate(Screen.ExpenseHandling, {
       modal: 'refactor',
@@ -44,14 +45,15 @@ export const Expense: FC<ExpensePropsType> = ({id, date, title, value}) => {
           <Text>{value}</Text>
         </View>
       </TouchableOpacity>
+
       {view && (
         <TouchableOpacity onPress={onRefactorItemPress}>
-          <Text>Refactor</Text>
+          <Text>{'Refactor'}</Text>
         </TouchableOpacity>
       )}
       {view && (
         <TouchableOpacity onPress={onDeleteItemPress}>
-          <Text>Delete</Text>
+          <Text>{'Delete'}</Text>
         </TouchableOpacity>
       )}
     </View>
