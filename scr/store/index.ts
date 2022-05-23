@@ -5,7 +5,7 @@ import {expenseSlice} from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  expense: expenseSlice.reducer,
+  expenseReducer: expenseSlice.reducer,
 });
 
 export const store = configureStore({

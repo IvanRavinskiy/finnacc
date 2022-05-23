@@ -6,7 +6,8 @@ import {addItem, refactorItem} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
-import {isFormNotEmpty, isValueFormHasNumber, useInputValue} from '../../utils';
+import {isFormNotEmpty, isValueFormHasNumber} from '../../utils';
+import {useInputValue} from './hooks';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -32,6 +33,12 @@ export const ExpenseHandling = ({route}: Props) => {
     onChangeInputValue: onChangeValue,
   } = useInputValue(params.value, isValueFormHasNumber);
 
+  const zeroField = () => {
+    setDate('');
+    setTitle('');
+    setValue('');
+  };
+
   const onSetItemPress = () => {
     if (params.modal === 'refactor') {
       if (isFormNotEmpty(date, title, value)) {
@@ -50,9 +57,7 @@ export const ExpenseHandling = ({route}: Props) => {
 
         dispatch(addItem({id, currentDate: date, category: title, value}));
 
-        setDate('');
-        setTitle('');
-        setValue('');
+        zeroField();
       } else {
         console.log('onSetItemPress add error');
       }

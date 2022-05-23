@@ -8,11 +8,11 @@ export type ExpenseItemType = {
 };
 
 export type InitStateType = {
-  expense: ExpenseItemType[];
+  expenses: ExpenseItemType[];
 };
 
 const initialState: InitStateType = {
-  expense: [
+  expenses: [
     {id: '1', currentDate: '11/02/2022', category: 'car', value: '23'},
     {id: '2', currentDate: '21/03/2022', category: 'food', value: '987'},
     {id: '3', currentDate: '22/03/2022', category: 'food', value: '232'},
@@ -38,8 +38,10 @@ export const expenseSlice = createSlice({
     ) => {
       const {category, value, id, currentDate} = action.payload;
 
-      state.expense = state.expense.map(i =>
-        i.id === id ? {...i, currentDate, value, category} : i,
+      state.expenses = state.expenses.map(expense =>
+        expense.id === id
+          ? {...expense, currentDate, value, category}
+          : expense,
       );
 
       return state;
@@ -47,12 +49,14 @@ export const expenseSlice = createSlice({
     addItem: (state: InitStateType, action: PayloadAction<ExpenseItemType>) => {
       const {category, value, id, currentDate} = action.payload;
 
-      state.expense.unshift({id, currentDate, value, category});
+      state.expenses.unshift({id, currentDate, value, category});
 
       return state;
     },
     deleteItem: (state: InitStateType, action: PayloadAction<string>) => {
-      state.expense = state.expense.filter(i => i.id !== action.payload);
+      state.expenses = state.expenses.filter(
+        expense => expense.id !== action.payload,
+      );
 
       return state;
     },
