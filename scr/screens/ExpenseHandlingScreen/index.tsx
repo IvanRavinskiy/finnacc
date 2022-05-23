@@ -14,23 +14,17 @@ export const ExpenseHandling = ({route}: Props) => {
 
   const dispatch = useDispatch();
 
-  // const [date, setDate, onChangeDate] = useInputValue(params.date);
-  // const [title, setTitle, onChangeTitle] = useInputValue(params.date);
-  // const [value, setValue, onChangeValue] = useInputValue(params.date, () =>
-  //     isValueFormHasNumber(value),
-  // );
-
   const {
     inputValue: date,
     setInputValue: setDate,
     onChangeInputValue: onChangeDate,
-  } = useInputValue(params.date);
+  } = useInputValue(params.currentDate);
 
   const {
     inputValue: title,
     setInputValue: setTitle,
     onChangeInputValue: onChangeTitle,
-  } = useInputValue(params.title);
+  } = useInputValue(params.category);
 
   const {
     inputValue: value,
@@ -43,7 +37,7 @@ export const ExpenseHandling = ({route}: Props) => {
       if (isFormNotEmpty(date, title, value)) {
         const id = params.id;
 
-        dispatch(refactorItem({id, date, title, value}));
+        dispatch(refactorItem({id, value, currentDate: date, category: title}));
 
         navigation.goBack();
       } else {
@@ -54,7 +48,7 @@ export const ExpenseHandling = ({route}: Props) => {
       if (isFormNotEmpty(date, title, value)) {
         const id = `${date}${title}${value}`;
 
-        dispatch(addItem({id, date, title, value}));
+        dispatch(addItem({id, currentDate: date, category: title, value}));
 
         setDate('');
         setTitle('');

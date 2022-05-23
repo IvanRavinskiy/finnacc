@@ -18,9 +18,9 @@ export const Home = () => {
   const onAddItemPress = () => {
     navigation.navigate(Screen.ExpenseHandling, {
       modal: 'add',
-      title: '',
+      category: '',
       value: '',
-      date: '',
+      currentDate: '',
       id: '',
     });
   };
@@ -29,10 +29,16 @@ export const Home = () => {
     <HeaderContainer>
       <ScrollView>
         {expenseData.map(expenseItem => {
-          const {title, value, date, id} = expenseItem;
+          const {category, value, currentDate, id} = expenseItem;
 
           return (
-            <Expense key={id} id={id} date={date} title={title} value={value} />
+            <Expense
+              key={id}
+              id={id}
+              date={currentDate}
+              title={category}
+              value={value}
+            />
           );
         })}
 

@@ -29,8 +29,8 @@ export const Expense: FC<ExpensePropsType> = props => {
     navigation.navigate(Screen.ExpenseHandling, {
       modal: 'refactor',
       id,
-      date,
-      title,
+      currentDate: date,
+      category: title,
       value,
     });
     setView(false);

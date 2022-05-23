@@ -3,8 +3,8 @@ export type RootStackParamList = {
   ExpenseHandling: {
     modal: 'add' | 'refactor';
     id: string;
-    date: string;
-    title: string;
+    currentDate: string;
+    category: string;
     value: string;
   };
 };
