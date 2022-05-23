@@ -1,43 +1,58 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-export type FbAuthType = {
+export type ExpenseItemType = {
   id: string;
-  date: string;
-  title: string;
+  currentDate: string;
+  category: string;
   value: string;
 };
 
-const initialState: FbAuthType[] = [
-  {id: '1', date: '11/02/2022', title: 'car', value: '23'},
-  {id: '2', date: '21/03/2022', title: 'food', value: '987'},
-  {id: '3', date: '22/03/2022', title: 'food', value: '232'},
-  {id: '4', date: '23/04/2022', title: 'car', value: '433'},
-  {id: '5', date: '03/05/2022', title: 'car', value: '34'},
-  {id: '6', date: '06/03/2022', title: 'pharmacy', value: '54'},
-  {id: '7', date: '06/04/2022', title: 'pharmacy', value: '23'},
-  {id: '8', date: '05/02/2022', title: 'car', value: '4545'},
-  {id: '9', date: '03/03/2022', title: 'services', value: '342'},
-  {id: '10', date: '11/02/4022', title: 'services', value: '12'},
-  {id: '11', date: '11/05/2022', title: 'clothes', value: '34'},
-  {id: '12', date: '22/02/2022', title: 'clothes', value: '54'},
-];
+export type InitStateType = {
+  expense: ExpenseItemType[];
+};
+
+const initialState: InitStateType = {
+  expense: [
+    {id: '1', currentDate: '11/02/2022', category: 'car', value: '23'},
+    {id: '2', currentDate: '21/03/2022', category: 'food', value: '987'},
+    {id: '3', currentDate: '22/03/2022', category: 'food', value: '232'},
+    {id: '4', currentDate: '23/04/2022', category: 'car', value: '433'},
+    {id: '5', currentDate: '03/05/2022', category: 'car', value: '34'},
+    {id: '6', currentDate: '06/03/2022', category: 'pharmacy', value: '54'},
+    {id: '7', currentDate: '06/04/2022', category: 'pharmacy', value: '23'},
+    {id: '8', currentDate: '05/02/2022', category: 'car', value: '4545'},
+    {id: '9', currentDate: '03/03/2022', category: 'services', value: '342'},
+    {id: '10', currentDate: '11/02/4022', category: 'services', value: '12'},
+    {id: '11', currentDate: '11/05/2022', category: 'clothes', value: '34'},
+    {id: '12', currentDate: '22/02/2022', category: 'clothes', value: '54'},
+  ],
+};
 
 export const expenseSlice = createSlice({
   name: 'expense',
   initialState,
   reducers: {
-    refactorItem: (state: FbAuthType[], action: PayloadAction<FbAuthType>) => {
-      const {title, value, id, date} = action.payload;
+    refactorItem: (
+      state: InitStateType,
+      action: PayloadAction<ExpenseItemType>,
+    ) => {
+      const {category, value, id, currentDate} = action.payload;
 
-      return state.map(i => (i.id === id ? {...i, date, value, title} : i));
-    },
-    addItem: (state: FbAuthType[], action: PayloadAction<FbAuthType>) => {
-      const {title, value, id, date} = action.payload;
+      state.expense = state.expense.map(i =>
+        i.id === id ? {...i, currentDate, value, category} : i,
+      );
 
-      return [{id, date, value, title}, ...state];
+      return state;
     },
-    deleteItem: (state: FbAuthType[], action: PayloadAction<string>) => {
-      state = state.filter(i => i.id !== action.payload);
+    addItem: (state: InitStateType, action: PayloadAction<ExpenseItemType>) => {
+      const {category, value, id, currentDate} = action.payload;
+
+      state.expense.unshift({id, currentDate, value, category});
+
+      return state;
+    },
+    deleteItem: (state: InitStateType, action: PayloadAction<string>) => {
+      state.expense = state.expense.filter(i => i.id !== action.payload);
 
       return state;
     },
