@@ -4,6 +4,7 @@ import {Home} from '../screens/HomeScreen';
 import {RootStackParamList} from './type';
 import {Screen} from '../enums/Screen';
 import {ExpenseHandling} from '../screens/ExpenseHandlingScreen';
+import {Login} from '../screens/LoginScreen';
 
 export const StackNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -13,6 +14,7 @@ export const StackNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
+      <Stack.Screen name={Screen.Login} component={Login} />
       <Stack.Screen name={Screen.Home} component={Home} />
       <Stack.Screen name={Screen.ExpenseHandling} component={ExpenseHandling} />
     </Stack.Navigator>
