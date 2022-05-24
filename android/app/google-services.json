@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "1088339943212",
-    "project_id": "financial-accounting-5d820",
-    "storage_bucket": "financial-accounting-5d820.appspot.com"
+    "project_number": "1026333214395",
+    "project_id": "new-finnacc",
+    "storage_bucket": "new-finnacc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1088339943212:android:7d828cca5d80fbb068d689",
+        "mobilesdk_app_id": "1:1026333214395:android:af50967151704da55a0b9e",
         "android_client_info": {
           "package_name": "com.finnacc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1088339943212-ltqiubef81qqq225fbv6jrhg18k68qar.apps.googleusercontent.com",
+          "client_id": "1026333214395-rajkaa3e5ltevlcvfb3j4d61evrsdo6o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.finnacc",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "certificate_hash": "774d26c0bb09bdca7f68a89ffcd694ee139f0871"
           }
         },
         {
-          "client_id": "1088339943212-l2m66btlind6v2nebg2qnj1or781fs1p.apps.googleusercontent.com",
+          "client_id": "1026333214395-p7r326melmskb13iq8h7mki6d77ptljs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCZJA8sFyW_pSGgSUpBWATjk_e_9VUDutc"
+          "current_key": "AIzaSyDxURAwFm0yC_Pl5VlVgNEAhVd5XSVRWBk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1088339943212-l2m66btlind6v2nebg2qnj1or781fs1p.apps.googleusercontent.com",
+              "client_id": "1026333214395-p7r326melmskb13iq8h7mki6d77ptljs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
