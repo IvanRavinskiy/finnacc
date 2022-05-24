@@ -3,6 +3,8 @@ import {GoogleSignin, User} from '@react-native-google-signin/google-signin';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import Config from 'react-native-config';
 import {setProfile} from '../reducers/loginSlice';
+import {navigate} from '../../utils/navigate';
+import {Screen} from '../../enums/Screen';
 
 type AuthCredential = FirebaseAuthTypes.AuthCredential;
 
@@ -22,6 +24,7 @@ export function* GoogleLogin(): any {
     );
     yield call(signInWithCredential, googleCredential);
     yield put(setProfile(userInfo.user));
+    yield navigate(Screen.Home);
   } catch (e) {
     yield call(console.log, `GoogleLoginSagaWorker error: ${e}`);
   }
