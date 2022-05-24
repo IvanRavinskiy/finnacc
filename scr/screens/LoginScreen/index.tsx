@@ -5,9 +5,9 @@ import {useDispatch} from 'react-redux';
 import {isGoogleLogin} from '../../store/reducers/loginSlice';
 
 export const Login = () => {
-  const dispatcch = useDispatch();
+  const dispatch = useDispatch();
   const onGoogleLoginPress = () => {
-    dispatcch(isGoogleLogin());
+    dispatch(isGoogleLogin());
   };
 
   return (
