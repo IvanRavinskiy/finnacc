@@ -19,4 +19,9 @@ export const headerStyles = StyleSheet.create({
     height: 50,
     width: 250,
   },
+  svgContainer: {
+    height: 30,
+    width: 30,
+    marginRight: 20,
+  },
 });
