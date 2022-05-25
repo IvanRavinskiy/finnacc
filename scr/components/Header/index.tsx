@@ -1,14 +1,16 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {headerStyles} from './style';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {selectProfile} from '../../store/selectors';
 import {SvgLogout} from '../../assets/svg/SvgLogout';
+import {isGoogleLogout} from '../../store/reducers/loginSlice';
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const onLogoutPress = () => {
-    console.log('onLogoutPress click');
+    dispatch(isGoogleLogout());
   };
 
   return (

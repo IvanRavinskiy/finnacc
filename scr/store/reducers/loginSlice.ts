@@ -35,6 +35,9 @@ export const loginSlice = createSlice({
     isGoogleLogin: (state: InitStateType) => {
       state.isAuth = true;
     },
+    isGoogleLogout: (state: InitStateType) => {
+      state.isAuth = false;
+    },
     setProfile: (
       state: InitStateType,
       action: PayloadAction<GoogleProfileType>,
@@ -45,4 +48,4 @@ export const loginSlice = createSlice({
   },
 });
 
-export const {isGoogleLogin, setProfile} = loginSlice.actions;
+export const {isGoogleLogin, setProfile, isGoogleLogout} = loginSlice.actions;
