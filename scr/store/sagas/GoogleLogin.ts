@@ -5,20 +5,16 @@ import Config from 'react-native-config';
 import {setProfile} from '../reducers/loginSlice';
 import {navigate} from '../../utils/navigate';
 import {Screen} from '../../enums/Screen';
-
-type AuthCredential = FirebaseAuthTypes.AuthCredential;
+import {signInWithCredential} from '../../services/google/signInWithCredential';
 
 export function* GoogleLogin(): any {
-  const signInWithCredential = (credential: AuthCredential) => {
-    return auth().signInWithCredential(credential);
-  };
   try {
     yield call(GoogleSignin.configure, {
       webClientId: Config.WEB_CLIENT_ID,
     });
     yield call(GoogleSignin.hasPlayServices);
     const userInfo: User = yield call(GoogleSignin.signIn);
-    const googleCredential: AuthCredential = yield call(
+    const googleCredential: FirebaseAuthTypes.AuthCredential = yield call(
       auth.GoogleAuthProvider.credential,
       userInfo.idToken,
     );
