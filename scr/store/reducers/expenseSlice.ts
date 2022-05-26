@@ -13,26 +13,19 @@ export type InitStateType = {
 };
 
 const initialState: InitStateType = {
-  expenses: [
-    {id: '1', currentDate: '11/02/2022', category: 'car', value: '23'},
-    {id: '2', currentDate: '21/03/2022', category: 'food', value: '987'},
-    {id: '3', currentDate: '22/03/2022', category: 'food', value: '232'},
-    {id: '4', currentDate: '23/04/2022', category: 'car', value: '433'},
-    {id: '5', currentDate: '03/05/2022', category: 'car', value: '34'},
-    {id: '6', currentDate: '06/03/2022', category: 'pharmacy', value: '54'},
-    {id: '7', currentDate: '06/04/2022', category: 'pharmacy', value: '23'},
-    {id: '8', currentDate: '05/02/2022', category: 'car', value: '4545'},
-    {id: '9', currentDate: '03/03/2022', category: 'services', value: '342'},
-    {id: '10', currentDate: '11/02/4022', category: 'services', value: '12'},
-    {id: '11', currentDate: '11/05/2022', category: 'clothes', value: '34'},
-    {id: '12', currentDate: '22/02/2022', category: 'clothes', value: '54'},
-  ],
+  expenses: [],
 };
 
 export const expenseSlice = createSlice({
   name: 'expense',
   initialState,
   reducers: {
+    setExpenses: (
+      state: InitStateType,
+      action: PayloadAction<ExpenseItemType[]>,
+    ) => {
+      state.expenses = [...action.payload];
+    },
     refactorItem: (
       state: InitStateType,
       action: PayloadAction<ExpenseItemType>,
@@ -64,6 +57,7 @@ export const expenseSlice = createSlice({
   },
 });
 
-export const {deleteItem, addItem, refactorItem} = expenseSlice.actions;
+export const {deleteItem, addItem, refactorItem, setExpenses} =
+  expenseSlice.actions;
 
 export const getDatabaseAC = createAction(SagaPattern.getDatabase);

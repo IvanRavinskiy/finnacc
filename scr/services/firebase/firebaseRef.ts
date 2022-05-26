@@ -6,7 +6,7 @@ export const firebaseRef = () => {
     .database(
       'https://new-finnacc-default-rtdb.europe-west1.firebasedatabase.app',
     )
-    .ref('/finnacc');
+    .ref('/finnacc/expenses');
 };
 
 export const db = (data: any) => {

@@ -16,7 +16,7 @@ export const Home = () => {
 
   const dispatch = useDispatch();
 
-  const expenseData = useSelector(selectExpenseData);
+  const expenses = useSelector(selectExpenseData);
 
   const onAddItemPress = () => {
     navigation.navigate(Screen.ExpenseHandling, {
@@ -30,13 +30,13 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(getDatabaseAC());
-  });
+  }, [dispatch]);
 
   return (
     <HeaderContainer>
       <ScrollView>
-        {expenseData.map(expenseItem => {
-          const {category, value, currentDate, id} = expenseItem;
+        {expenses.map(expense => {
+          const {category, value, currentDate, id} = expense;
 
           return (
             <Expense
