@@ -4,13 +4,13 @@ import {headerStyles} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectProfile} from '../../store/selectors';
 import {SvgLogout} from '../../assets/svg/SvgLogout';
-import {isGoogleLogout} from '../../store/reducers/loginSlice';
+import {GoogleLogoutAC} from '../../store/reducers/loginSlice';
 
 export const Header = () => {
   const dispatch = useDispatch();
   const profile = useSelector(selectProfile);
   const onLogoutPress = () => {
-    dispatch(isGoogleLogout());
+    dispatch(GoogleLogoutAC());
   };
 
   return (

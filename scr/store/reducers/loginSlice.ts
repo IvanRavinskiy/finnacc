@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {SagaPattern} from '../enums/SagaPattern';
 
 export type NullableType<T> = T | null;
 
@@ -12,12 +13,10 @@ export type GoogleProfileType = {
 };
 
 export type InitStateType = {
-  isAuth: boolean;
   profile: GoogleProfileType;
 };
 
 const initialState: InitStateType = {
-  isAuth: false,
   profile: {
     email: '',
     familyName: '',
@@ -32,12 +31,6 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    isGoogleLogin: (state: InitStateType) => {
-      state.isAuth = true;
-    },
-    isGoogleLogout: (state: InitStateType) => {
-      state.isAuth = false;
-    },
     setProfile: (
       state: InitStateType,
       action: PayloadAction<GoogleProfileType>,
@@ -49,4 +42,7 @@ export const loginSlice = createSlice({
   },
 });
 
-export const {isGoogleLogin, setProfile, isGoogleLogout} = loginSlice.actions;
+export const {setProfile} = loginSlice.actions;
+
+export const GoogleLoginAC = createAction(SagaPattern.isGoogleLogin);
+export const GoogleLogoutAC = createAction(SagaPattern.isGoogleLogout);
