@@ -4,10 +4,12 @@ import {GoogleLogin} from './GoogleLogin';
 import {GoogleLogout} from './GoogleLogout';
 import {setDatabase} from './setDatabase';
 import {addExpense} from './addExpense';
+import {updateExpense} from './updateExpense';
 
 export function* RootSaga() {
   yield takeLatest(SagaPattern.isGoogleLogin, GoogleLogin);
   yield takeLatest(SagaPattern.isGoogleLogout, GoogleLogout);
   yield takeLatest(SagaPattern.getDatabase, setDatabase);
   yield takeLatest(SagaPattern.addExpenseToDatabase, addExpense);
+  yield takeLatest(SagaPattern.updateExpenseToDatabase, updateExpense);
 }

@@ -62,3 +62,9 @@ export const addExpenseAC = createAction(
     payload,
   }),
 );
+export const updateExpenseAC = createAction(
+  SagaPattern.updateExpenseToDatabase,
+  (payload: any) => ({
+    payload,
+  }),
+);

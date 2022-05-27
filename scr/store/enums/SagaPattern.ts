@@ -3,4 +3,5 @@ export enum SagaPattern {
   isGoogleLogout = 'login/isGoogleLogout',
   getDatabase = 'expense/getDatabase',
   addExpenseToDatabase = 'expense/addExpenseToDatabase',
+  updateExpenseToDatabase = 'expense/updateExpenseToDatabase',
 }

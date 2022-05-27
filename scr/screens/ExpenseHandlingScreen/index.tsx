@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
-import {addExpenseAC, refactorItem} from '../../store/reducers/expenseSlice';
+import {addExpenseAC, updateExpenseAC} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
@@ -44,7 +44,9 @@ export const ExpenseHandling = ({route}: Props) => {
       if (isFormNotEmpty(date, title, value)) {
         const id = params.id;
 
-        dispatch(refactorItem({id, value, currentDate: date, category: title}));
+        dispatch(
+          updateExpenseAC({id, currentDate: date, category: title, value}),
+        );
 
         navigation.goBack();
       } else {
