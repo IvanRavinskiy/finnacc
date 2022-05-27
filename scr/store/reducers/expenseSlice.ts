@@ -37,22 +37,16 @@ export const expenseSlice = createSlice({
           ? {...expense, currentDate, value, category}
           : expense,
       );
-
-      return state;
     },
     addItem: (state: InitStateType, action: PayloadAction<ExpenseItemType>) => {
-      const {category, value, id, currentDate} = action.payload;
+      const {id, currentDate, value, category} = action.payload;
 
       state.expenses.unshift({id, currentDate, value, category});
-
-      return state;
     },
     deleteItem: (state: InitStateType, action: PayloadAction<string>) => {
       state.expenses = state.expenses.filter(
         expense => expense.id !== action.payload,
       );
-
-      return state;
     },
   },
 });
@@ -61,3 +55,10 @@ export const {deleteItem, addItem, refactorItem, setExpenses} =
   expenseSlice.actions;
 
 export const getDatabaseAC = createAction(SagaPattern.getDatabase);
+
+export const addExpenseAC = createAction(
+  SagaPattern.addExpenseToDatabase,
+  (payload: any) => ({
+    payload,
+  }),
+);
