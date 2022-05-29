@@ -2,12 +2,13 @@ import React from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
-import {addExpenseAC, updateExpenseAC} from '../../store/reducers/expenseSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp, Props} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
 import {isFormNotEmpty, isValueFormHasNumber} from '../../utils';
 import {useInputValue} from './hooks';
+import {addExpenseAC} from '../../store/actions/expensesSagaActions';
+import {updateExpenseAC} from '../../store/actions/expensesSagaActions';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();

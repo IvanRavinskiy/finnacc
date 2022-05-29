@@ -1,12 +1,12 @@
 import React, {FC, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {deleteExpenseAC} from '../../store/reducers/expenseSlice';
 import {expenseStyles} from './style';
 import {Screen} from '../../enums/Screen';
 import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp} from '../../screens/HomeScreen/type';
 import {ExpensePropsType} from './type';
+import {deleteExpenseAC} from '../../store/actions/expensesSagaActions';
 
 export const Expense: FC<ExpensePropsType> = props => {
   const {id, date, title, value} = props;

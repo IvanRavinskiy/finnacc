@@ -1,5 +1,4 @@
-import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {SagaPattern} from '../enums/SagaPattern';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export type ExpenseItemType = {
   id: string;
@@ -53,26 +52,3 @@ export const expenseSlice = createSlice({
 
 export const {deleteItem, addItem, refactorItem, setExpenses} =
   expenseSlice.actions;
-
-export const getDatabaseAC = createAction(SagaPattern.getDatabase);
-
-export const addExpenseAC = createAction(
-  SagaPattern.addExpenseToDatabase,
-  (payload: any) => ({
-    payload,
-  }),
-);
-
-export const updateExpenseAC = createAction(
-  SagaPattern.updateExpenseToDatabase,
-  (payload: any) => ({
-    payload,
-  }),
-);
-
-export const deleteExpenseAC = createAction(
-  SagaPattern.deleteExpenseToDatabase,
-  (payload: any) => ({
-    payload,
-  }),
-);

@@ -9,7 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Screen} from '../../enums/Screen';
 import type {HomeNavigationProp} from './type';
 import {HeaderContainer} from '../../components/HeaderContainer';
-import {getDatabaseAC} from '../../store/reducers/expenseSlice';
+import {getDatabaseAC} from '../../store/actions/expensesSagaActions';
 
 export const Home = () => {
   const navigation = useNavigation<HomeNavigationProp>();
