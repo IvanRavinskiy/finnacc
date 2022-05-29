@@ -1,6 +1,7 @@
 import {call, put} from 'redux-saga/effects';
-import {firebaseRef, updateItemToDb} from '../../services/firebase/firebaseRef';
+import {firebaseRef} from '../../services/firebase/firebaseRef';
 import {refactorItem} from '../reducers/expenseSlice/expenseSlice';
+import {updateItemToDb} from '../../services/firebase/updateItemToDb';
 
 export function* updateExpense(action: any): Generator<unknown, void, any> {
   const {id, currentDate, value, category} = action.payload;
