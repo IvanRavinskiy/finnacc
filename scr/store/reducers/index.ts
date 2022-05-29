@@ -1,2 +1,2 @@
-export {expenseSlice} from './expenseSlice';
-export {loginSlice} from './loginSlice';
+export {expenseSlice} from './expenseSlice/expenseSlice';
+export {loginSlice} from './loginSlice/loginSlice';

@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import {deleteItemToDb, firebaseRef} from '../../services/firebase/firebaseRef';
-import {deleteItem} from '../reducers/expenseSlice';
+import {deleteItem} from '../reducers/expenseSlice/expenseSlice';
 
 export function* deleteExpense(action: any): Generator<unknown, void, any> {
   const id = action.payload;

@@ -1,15 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-export type ExpenseItemType = {
-  id: string;
-  currentDate: string;
-  category: string;
-  value: string;
-};
-
-export type InitStateType = {
-  expenses: ExpenseItemType[];
-};
+import {ExpenseItemType, InitStateType} from './types';
 
 const initialState: InitStateType = {
   expenses: [],

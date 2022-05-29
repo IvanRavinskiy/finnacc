@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 import {db, firebaseRef} from '../../services/firebase/firebaseRef';
-import {setExpenses} from '../reducers/expenseSlice';
+import {setExpenses} from '../reducers/expenseSlice/expenseSlice';
 
 export function* setDatabase(): any {
   try {

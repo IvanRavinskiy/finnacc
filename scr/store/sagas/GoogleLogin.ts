@@ -2,7 +2,7 @@ import {call, put} from 'redux-saga/effects';
 import {GoogleSignin, User} from '@react-native-google-signin/google-signin';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import Config from 'react-native-config';
-import {setProfile} from '../reducers/loginSlice';
+import {setProfile} from '../reducers/loginSlice/loginSlice';
 import {navigate} from '../../utils/navigate';
 import {Screen} from '../../enums/Screen';
 import {signInWithCredential} from '../../services/google/signInWithCredential';
