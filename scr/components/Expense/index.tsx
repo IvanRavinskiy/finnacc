@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {deleteItem} from '../../store/reducers/expenseSlice';
+import {deleteExpenseAC} from '../../store/reducers/expenseSlice';
 import {expenseStyles} from './style';
 import {Screen} from '../../enums/Screen';
 import {useNavigation} from '@react-navigation/native';
@@ -22,7 +22,7 @@ export const Expense: FC<ExpensePropsType> = props => {
   };
 
   const onDeleteItemPress = () => {
-    dispatch(deleteItem(id));
+    dispatch(deleteExpenseAC(id));
   };
 
   const onRefactorItemPress = () => {

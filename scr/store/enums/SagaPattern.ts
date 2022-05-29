@@ -4,4 +4,5 @@ export enum SagaPattern {
   getDatabase = 'expense/getDatabase',
   addExpenseToDatabase = 'expense/addExpenseToDatabase',
   updateExpenseToDatabase = 'expense/updateExpenseToDatabase',
+  deleteExpenseToDatabase = 'expense/deleteExpenseToDatabase',
 }
