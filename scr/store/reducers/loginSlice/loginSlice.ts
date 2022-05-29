@@ -21,8 +21,6 @@ export const loginSlice = createSlice({
       action: PayloadAction<GoogleProfileType>,
     ) => {
       state.profile = action.payload;
-
-      return state;
     },
   },
 });
