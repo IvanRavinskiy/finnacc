@@ -8,7 +8,7 @@ export const firebaseRef = () => {
     );
 };
 
-export const db = (data: any) => {
+export const setDb = (data: any) => {
   return data
     .ref('/finnacc/expenses')
     .once('value')
