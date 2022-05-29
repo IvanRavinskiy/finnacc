@@ -4,7 +4,7 @@ import {headerStyles} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectProfile} from '../../store/selectors';
 import {SvgLogout} from '../../assets/svg/SvgLogout';
-import {GoogleLogoutAC} from '../../store/reducers/loginSlice';
+import {GoogleLogoutAC} from '../../store/actions/loginSagaActions';
 
 export const Header = () => {
   const dispatch = useDispatch();

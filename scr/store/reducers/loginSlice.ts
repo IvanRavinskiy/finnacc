@@ -1,5 +1,4 @@
-import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {SagaPattern} from '../enums/SagaPattern';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export type NullableType<T> = T | null;
 
@@ -43,6 +42,3 @@ export const loginSlice = createSlice({
 });
 
 export const {setProfile} = loginSlice.actions;
-
-export const GoogleLoginAC = createAction(SagaPattern.isGoogleLogin);
-export const GoogleLogoutAC = createAction(SagaPattern.isGoogleLogout);

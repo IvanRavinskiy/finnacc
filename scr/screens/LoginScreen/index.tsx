@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, View} from 'react-native';
 import {loginStyles} from './style';
 import {useDispatch} from 'react-redux';
-import {GoogleLoginAC} from '../../store/reducers/loginSlice';
+import {GoogleLoginAC} from '../../store/actions/loginSagaActions';
 
 export const Login = () => {
   const dispatch = useDispatch();
