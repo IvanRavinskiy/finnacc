@@ -24,12 +24,10 @@ export const addItemToDb = (
   value: string,
   category: string,
 ) => {
-  const newRef = data.ref('/finnacc/expenses').push();
-
-  const ID = newRef.key;
+  const newRef = data.ref(`/finnacc/expenses/${id}`);
 
   return newRef.set({
-    id: ID,
+    id,
     currentDate,
     value,
     category,
