@@ -14,6 +14,7 @@ export const headerStyles = StyleSheet.create({
     borderRadius: 25,
   },
   profile: {
+    textAlignVertical: 'center',
     fontWeight: '500',
     color: '#efe6ef',
     height: 50,
