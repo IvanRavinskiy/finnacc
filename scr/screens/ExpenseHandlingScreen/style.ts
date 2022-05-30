@@ -10,4 +10,9 @@ export const expenseHandlingStyles = StyleSheet.create({
     borderStyle: 'solid',
     margin: 10,
   },
+  dateText: {
+    height: 40,
+    textAlignVertical: 'center',
+    marginLeft: 5,
+  },
 });

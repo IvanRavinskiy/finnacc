@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
@@ -9,18 +9,13 @@ import {isFormNotEmpty, isValueFormHasNumber} from '../../utils';
 import {useInputValue} from './hooks';
 import {addExpenseAC} from '../../store/actions/expensesSagaActions';
 import {updateExpenseAC} from '../../store/actions/expensesSagaActions';
+import DatePicker from 'react-native-date-picker';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
   const {params} = route;
 
   const dispatch = useDispatch();
-
-  const {
-    inputValue: date,
-    setInputValue: setDate,
-    onChangeInputValue: onChangeDate,
-  } = useInputValue(params.currentDate);
 
   const {
     inputValue: title,
@@ -35,9 +30,19 @@ export const ExpenseHandling = ({route}: Props) => {
   } = useInputValue(params.value, isValueFormHasNumber);
 
   const zeroField = () => {
-    setDate('');
     setTitle('');
     setValue('');
+  };
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+
+  const confirmDate = (dateCur: Date) => {
+    setOpen(false);
+    setDate(dateCur);
+  };
+
+  const unconfirmDate = () => {
+    setOpen(false);
   };
 
   const onSetItemPress = () => {
@@ -46,7 +51,12 @@ export const ExpenseHandling = ({route}: Props) => {
         const id = params.id;
 
         dispatch(
-          updateExpenseAC({id, currentDate: date, category: title, value}),
+          updateExpenseAC({
+            id,
+            currentDate: date.toLocaleDateString(),
+            category: title,
+            value,
+          }),
         );
 
         navigation.goBack();
@@ -58,7 +68,14 @@ export const ExpenseHandling = ({route}: Props) => {
       if (isFormNotEmpty(date, title, value)) {
         const id = `${date}${title}${value}`;
 
-        dispatch(addExpenseAC({id, currentDate: date, category: title, value}));
+        dispatch(
+          addExpenseAC({
+            id,
+            currentDate: date.toLocaleDateString(),
+            category: title,
+            value,
+          }),
+        );
 
         zeroField();
       } else {
@@ -70,12 +87,27 @@ export const ExpenseHandling = ({route}: Props) => {
   return (
     <HeaderContainer>
       <View>
-        <TextInput
-          style={expenseHandlingStyles.input}
-          placeholder="Require date"
-          onChangeText={onChangeDate}
-          defaultValue={date}
-        />
+        <TouchableOpacity onPress={() => setOpen(true)}>
+          <View style={expenseHandlingStyles.input}>
+            <Text style={expenseHandlingStyles.dateText}>
+              {date.toLocaleDateString()}
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        {open && (
+          <DatePicker
+            modal
+            mode={'date'}
+            open={open}
+            date={date}
+            onConfirm={dateCur => {
+              confirmDate(dateCur);
+            }}
+            onCancel={unconfirmDate}
+          />
+        )}
+
         <TextInput
           style={expenseHandlingStyles.input}
           placeholder="Require title"
