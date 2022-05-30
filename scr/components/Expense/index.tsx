@@ -7,6 +7,9 @@ import {useNavigation} from '@react-navigation/native';
 import {HomeNavigationProp} from '../../screens/HomeScreen/type';
 import {ExpensePropsType} from './type';
 import {deleteExpenseAC} from '../../store/actions/expensesSagaActions';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faSquarePen} from '@fortawesome/free-solid-svg-icons/faSquarePen';
+import {faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
 
 export const Expense: FC<ExpensePropsType> = props => {
   const {id, date, title, value} = props;
@@ -37,7 +40,7 @@ export const Expense: FC<ExpensePropsType> = props => {
   };
 
   return (
-    <View>
+    <View style={expenseStyles.container}>
       <TouchableOpacity onPress={onShowControlPress}>
         <View style={expenseStyles.item}>
           <Text>{date}</Text>
@@ -47,14 +50,14 @@ export const Expense: FC<ExpensePropsType> = props => {
       </TouchableOpacity>
 
       {view && (
-        <TouchableOpacity onPress={onRefactorItemPress}>
-          <Text>{'Refactor'}</Text>
-        </TouchableOpacity>
-      )}
-      {view && (
-        <TouchableOpacity onPress={onDeleteItemPress}>
-          <Text>{'Delete'}</Text>
-        </TouchableOpacity>
+        <View style={expenseStyles.svgContainer}>
+          <TouchableOpacity onPress={onRefactorItemPress}>
+            <FontAwesomeIcon size={30} icon={faSquarePen} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onDeleteItemPress}>
+            <FontAwesomeIcon size={30} icon={faTrash} />
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );

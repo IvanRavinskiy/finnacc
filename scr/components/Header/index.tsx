@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {headerStyles} from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectProfile} from '../../store/selectors';
-import {SvgLogout} from '../../assets/svg/SvgLogout';
 import {GoogleLogoutAC} from '../../store/actions/loginSagaActions';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons/faRightFromBracket';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,9 @@ export const Header = () => {
         }}
       />
       <Text style={headerStyles.profile}>{profile.name}</Text>
-      <View style={headerStyles.svgContainer}>
-        <SvgLogout onPress={onLogoutPress} />
-      </View>
+      <TouchableOpacity onPress={onLogoutPress}>
+        <FontAwesomeIcon size={25} icon={faRightFromBracket} />
+      </TouchableOpacity>
     </View>
   );
 };

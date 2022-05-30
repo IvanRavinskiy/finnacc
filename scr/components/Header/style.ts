@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const headerStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     backgroundColor: '#888688',
   },
@@ -18,10 +18,5 @@ export const headerStyles = StyleSheet.create({
     color: '#efe6ef',
     height: 50,
     width: 250,
-  },
-  svgContainer: {
-    height: 30,
-    width: 30,
-    marginRight: 20,
   },
 });
