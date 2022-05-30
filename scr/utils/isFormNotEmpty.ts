@@ -1,5 +1,5 @@
-export const isFormNotEmpty = (date: any, title: string, value: string) => {
-  const expenses = [date, title, value];
+export const isFormNotEmpty = (date: Date, title: string, value: string) => {
+  const expenses = [date.toString(), title, value];
 
   return expenses.every(expense => expense.length !== 0);
 };
