@@ -1,5 +1,7 @@
 export type RootStackParamList = {
   Login: undefined;
+  Tab: undefined;
+  Chart: undefined;
   Home: undefined;
   ExpenseHandling: {
     modal: 'add' | 'refactor';

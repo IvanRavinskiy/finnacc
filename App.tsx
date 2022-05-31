@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {store} from './scr/store';
-import {StackNavigator} from './scr/navigation/StackNavigator';
+import {StackNavigator} from './scr/navigation/Stack/StackNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from './scr/utils/navigate';
 
