@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import {expenseSlice, loginSlice} from './reducers';
+import {expenseSlice, loaderSlice, loginSlice} from './reducers';
 import {RootSaga} from './sagas/RootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -8,6 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   expenseReducer: expenseSlice.reducer,
   loginReducer: loginSlice.reducer,
+  loaderReducer: loaderSlice.reducer,
 });
 
 export const store = configureStore({
