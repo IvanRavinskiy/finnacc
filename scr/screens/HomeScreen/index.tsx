@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {ScrollView, TouchableOpacity} from 'react-native';
 import {Expense} from '../../components/Expense';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectExpenseData} from '../../store/selectors';
+import {selectExpenseData, selectLoader} from '../../store/selectors';
 import {useNavigation} from '@react-navigation/native';
 import {Screen} from '../../enums/Screen';
 import type {HomeNavigationProp} from './type';
@@ -10,6 +10,7 @@ import {HeaderContainer} from '../../components/HeaderContainer';
 import {getDatabaseAC} from '../../store/actions/expensesSagaActions';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCirclePlus} from '@fortawesome/free-solid-svg-icons/faCirclePlus';
+import {Loader} from '../../components/Loader';
 
 export const Home = () => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -31,6 +32,12 @@ export const Home = () => {
   useEffect(() => {
     dispatch(getDatabaseAC());
   }, [dispatch]);
+
+  const isLoading = useSelector(selectLoader);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <HeaderContainer>
