@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
@@ -14,6 +14,11 @@ import DatePicker from 'react-native-date-picker';
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
   const {params} = route;
+
+  useEffect(() => {
+    //@ts-ignore
+    navigation.setOptions({tabBarStyle: {display: 'none'}});
+  }, [navigation]);
 
   const dispatch = useDispatch();
 
