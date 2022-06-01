@@ -10,6 +10,9 @@ import {useInputValue} from './hooks';
 import {addExpenseAC} from '../../store/actions/expensesSagaActions';
 import {updateExpenseAC} from '../../store/actions/expensesSagaActions';
 import DatePicker from 'react-native-date-picker';
+import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faRotateLeft} from '@fortawesome/free-solid-svg-icons/faRotateLeft';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -131,12 +134,14 @@ export const ExpenseHandling = ({route}: Props) => {
           defaultValue={value}
         />
 
-        <TouchableOpacity onPress={onSetItemPress}>
-          <Text>{'OK'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onBackScreenPress}>
-          <Text>{'Back'}</Text>
-        </TouchableOpacity>
+        <View style={expenseHandlingStyles.btnContainer}>
+          <TouchableOpacity onPress={onSetItemPress}>
+            <FontAwesomeIcon color={'green'} size={40} icon={faCheck} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onBackScreenPress}>
+            <FontAwesomeIcon color={'red'} size={40} icon={faRotateLeft} />
+          </TouchableOpacity>
+        </View>
       </View>
     </HeaderContainer>
   );

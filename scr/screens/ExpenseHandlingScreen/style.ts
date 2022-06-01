@@ -15,4 +15,10 @@ export const expenseHandlingStyles = StyleSheet.create({
     textAlignVertical: 'center',
     marginLeft: 5,
   },
+  btnContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+  },
 });
