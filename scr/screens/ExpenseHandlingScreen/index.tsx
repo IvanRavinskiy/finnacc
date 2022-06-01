@@ -84,6 +84,10 @@ export const ExpenseHandling = ({route}: Props) => {
     }
   };
 
+  const onBackScreenPress = () => {
+    navigation.goBack();
+  };
+
   return (
     <HeaderContainer>
       <View>
@@ -124,6 +128,9 @@ export const ExpenseHandling = ({route}: Props) => {
 
         <TouchableOpacity onPress={onSetItemPress}>
           <Text>{'OK'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onBackScreenPress}>
+          <Text>{'Back'}</Text>
         </TouchableOpacity>
       </View>
     </HeaderContainer>

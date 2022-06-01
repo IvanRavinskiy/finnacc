@@ -5,6 +5,8 @@ import {Chart} from '../../screens/ChartScreen';
 import {ExpenseHandling} from '../../screens/ExpenseHandlingScreen';
 import {faCirclePlus} from '@fortawesome/free-solid-svg-icons/faCirclePlus';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
+import {faChartPie} from '@fortawesome/free-solid-svg-icons/faChartPie';
 
 const Tab = createBottomTabNavigator();
 export const TabStack = () => {
@@ -19,7 +21,7 @@ export const TabStack = () => {
         options={{
           tabBarLabel: 'List',
           tabBarIcon: () => (
-            <FontAwesomeIcon size={25} color={'black'} icon={faCirclePlus} />
+            <FontAwesomeIcon size={25} color={'black'} icon={faBars} />
           ),
         }}
       />
@@ -29,15 +31,22 @@ export const TabStack = () => {
         options={{
           tabBarLabel: 'Chart',
           tabBarIcon: () => (
-            <FontAwesomeIcon size={25} color={'red'} icon={faCirclePlus} />
+            <FontAwesomeIcon size={25} color={'red'} icon={faChartPie} />
           ),
         }}
       />
       <Tab.Screen
         name="AddExpense"
         component={ExpenseHandling}
+        initialParams={{
+          modal: 'add',
+          category: '',
+          value: '',
+          currentDate: '',
+          id: '',
+        }}
         options={{
-          tabBarLabel: 'AddExpense',
+          tabBarLabel: 'Add',
           tabBarIcon: () => (
             <FontAwesomeIcon size={25} color={'green'} icon={faCirclePlus} />
           ),

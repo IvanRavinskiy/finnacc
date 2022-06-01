@@ -23,7 +23,7 @@ export function* GoogleLogin(): any {
     yield call(signInWithCredential, googleCredential);
     yield put(setProfile(userInfo.user));
     yield put(isLoading(false));
-    yield navigate(Screen.Home);
+    yield navigate(Screen.Tab);
   } catch (e) {
     yield call(console.log, `GoogleLoginSagaWorker error: ${e}`);
   }
