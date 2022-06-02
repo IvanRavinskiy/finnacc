@@ -13,6 +13,7 @@ import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faRotateLeft} from '@fortawesome/free-solid-svg-icons/faRotateLeft';
 import {Calendar} from '../../components/Calendar';
+import {ExpenseCategoryList} from '../../components/ExpenseCategoryList';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -25,36 +26,39 @@ export const ExpenseHandling = ({route}: Props) => {
 
   const dispatch = useDispatch();
 
-  const {
-    inputValue: title,
-    setInputValue: setTitle,
-    onChangeInputValue: onChangeTitle,
-  } = useInputValue(params.category);
+  const [date, setDate] = useState<Date>(new Date());
+
+  const [category, setCategory] = useState<null | string>(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // const {
+  //   inputValue: title,
+  //   setInputValue: setTitle,
+  //   onChangeInputValue: onChangeTitle,
+  // } = useInputValue(params.category);
 
   const {
-    inputValue: value,
+    inputValue: currentInputValue,
     setInputValue: setValue,
     onChangeInputValue: onChangeValue,
   } = useInputValue(params.value, isValueFormHasNumber);
 
   const zeroField = () => {
-    setTitle('');
+    setSelectedCategory(null);
     setValue('');
   };
 
-  const [date, setDate] = useState(new Date());
-
   const onSetItemPress = () => {
     if (params.modal === 'refactor') {
-      if (isFormNotEmpty(date, title, value)) {
+      if (isFormNotEmpty(date, category, currentInputValue)) {
         const id = params.id;
 
         dispatch(
           updateExpenseAC({
             id,
             currentDate: date.toLocaleDateString(),
-            category: title,
-            value,
+            category,
+            value: currentInputValue,
           }),
         );
 
@@ -64,15 +68,14 @@ export const ExpenseHandling = ({route}: Props) => {
       }
     }
     if (params.modal === 'add') {
-      if (isFormNotEmpty(date, title, value)) {
-        const id = `${date}${title}${value}`;
-
+      if (isFormNotEmpty(date, category, currentInputValue)) {
+        const id = `${date}${category}${currentInputValue}`;
         dispatch(
           addExpenseAC({
             id,
             currentDate: date.toLocaleDateString(),
-            category: title,
-            value,
+            category,
+            value: currentInputValue,
           }),
         );
 
@@ -92,18 +95,24 @@ export const ExpenseHandling = ({route}: Props) => {
       <View>
         <Calendar date={date} setDate={setDate} />
 
-        <TextInput
-          style={expenseHandlingStyles.input}
-          placeholder="Require title"
-          onChangeText={onChangeTitle}
-          defaultValue={title}
+        <ExpenseCategoryList
+          value={selectedCategory}
+          setValue={setSelectedCategory}
+          setCategory={setCategory}
         />
+
+        {/*<TextInput*/}
+        {/*  style={expenseHandlingStyles.input}*/}
+        {/*  placeholder="Require title"*/}
+        {/*  onChangeText={onChangeTitle}*/}
+        {/*  defaultValue={title}*/}
+        {/*/>*/}
         <TextInput
           style={expenseHandlingStyles.input}
           keyboardType="numeric"
           placeholder="Require value"
           onChangeText={onChangeValue}
-          defaultValue={value}
+          defaultValue={currentInputValue}
         />
 
         <View style={expenseHandlingStyles.btnContainer}>
