@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-export const expenseHandlingStyles = StyleSheet.create({
+export const calendarStyles = StyleSheet.create({
   input: {
     height: 40,
     backgroundColor: '#00ffc2',
@@ -10,10 +10,9 @@ export const expenseHandlingStyles = StyleSheet.create({
     borderStyle: 'solid',
     margin: 10,
   },
-  btnContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'row',
+  dateText: {
+    height: 40,
+    textAlignVertical: 'center',
+    marginLeft: 5,
   },
 });

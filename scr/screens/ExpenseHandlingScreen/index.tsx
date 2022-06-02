@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -9,10 +9,10 @@ import {isFormNotEmpty, isValueFormHasNumber} from '../../utils';
 import {useInputValue} from './hooks';
 import {addExpenseAC} from '../../store/actions/expensesSagaActions';
 import {updateExpenseAC} from '../../store/actions/expensesSagaActions';
-import DatePicker from 'react-native-date-picker';
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faRotateLeft} from '@fortawesome/free-solid-svg-icons/faRotateLeft';
+import {Calendar} from '../../components/Calendar';
 
 export const ExpenseHandling = ({route}: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -41,17 +41,8 @@ export const ExpenseHandling = ({route}: Props) => {
     setTitle('');
     setValue('');
   };
+
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-
-  const confirmDate = (dateCur: Date) => {
-    setOpen(false);
-    setDate(dateCur);
-  };
-
-  const unconfirmDate = () => {
-    setOpen(false);
-  };
 
   const onSetItemPress = () => {
     if (params.modal === 'refactor') {
@@ -99,26 +90,7 @@ export const ExpenseHandling = ({route}: Props) => {
   return (
     <HeaderContainer>
       <View>
-        <TouchableOpacity onPress={() => setOpen(true)}>
-          <View style={expenseHandlingStyles.input}>
-            <Text style={expenseHandlingStyles.dateText}>
-              {date.toLocaleDateString()}
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        {open && (
-          <DatePicker
-            modal
-            mode={'date'}
-            open={open}
-            date={date}
-            onConfirm={dateCur => {
-              confirmDate(dateCur);
-            }}
-            onCancel={unconfirmDate}
-          />
-        )}
+        <Calendar date={date} setDate={setDate} />
 
         <TextInput
           style={expenseHandlingStyles.input}
