@@ -1,12 +1,8 @@
 import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-export type CategoryPropsType = {
-  value: any;
-  setValue: (value: any) => void;
-  setCategory: (category: null | string) => void;
-};
+import {CategoryPropsType} from './type';
+import {expenseCategoryListStyles} from './style';
 
 export const ExpenseCategoryList: FC<CategoryPropsType> = ({
   value,
@@ -14,9 +10,6 @@ export const ExpenseCategoryList: FC<CategoryPropsType> = ({
   setCategory,
 }) => {
   const [open, setOpen] = useState(false);
-  // const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
-
-  // const [value, setValue] = useState<null | string>(null);
 
   const [items, setItems] = useState([
     {label: 'Food', value: 'Food'},
@@ -43,6 +36,7 @@ export const ExpenseCategoryList: FC<CategoryPropsType> = ({
   return (
     <View>
       <DropDownPicker
+        style={expenseCategoryListStyles.main}
         placeholder="Select category"
         open={open}
         value={value}

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {TextInput, TouchableOpacity, View} from 'react-native';
+import {Keyboard, TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -29,13 +29,8 @@ export const ExpenseHandling = ({route}: Props) => {
   const [date, setDate] = useState<Date>(new Date());
 
   const [category, setCategory] = useState<null | string>(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // const {
-  //   inputValue: title,
-  //   setInputValue: setTitle,
-  //   onChangeInputValue: onChangeTitle,
-  // } = useInputValue(params.category);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const {
     inputValue: currentInputValue,
@@ -101,18 +96,13 @@ export const ExpenseHandling = ({route}: Props) => {
           setCategory={setCategory}
         />
 
-        {/*<TextInput*/}
-        {/*  style={expenseHandlingStyles.input}*/}
-        {/*  placeholder="Require title"*/}
-        {/*  onChangeText={onChangeTitle}*/}
-        {/*  defaultValue={title}*/}
-        {/*/>*/}
         <TextInput
           style={expenseHandlingStyles.input}
           keyboardType="numeric"
           placeholder="Require value"
           onChangeText={onChangeValue}
           defaultValue={currentInputValue}
+          onBlur={() => Keyboard.dismiss}
         />
 
         <View style={expenseHandlingStyles.btnContainer}>
