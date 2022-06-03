@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Keyboard, TextInput, TouchableOpacity, View} from 'react-native';
+import {TextInput, TouchableOpacity, View} from 'react-native';
 import {expenseHandlingStyles} from './style';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -102,7 +102,6 @@ export const ExpenseHandling = ({route}: Props) => {
           placeholder="Require value"
           onChangeText={onChangeValue}
           defaultValue={currentInputValue}
-          onBlur={() => Keyboard.dismiss}
         />
 
         <View style={expenseHandlingStyles.btnContainer}>
