@@ -1,0 +1,17 @@
+export enum Expense {
+  Food = 'Food',
+  Car = 'Car',
+  Pharmacy = 'Pharmacy',
+  Baby = 'Baby',
+  Service = 'Service',
+  HouseholdChemicals = 'Household chemicals',
+  Appliances = 'Appliances',
+  Cafe = 'Cafe',
+  Entertainment = 'Entertainment',
+  Traffic = 'Traffic',
+  Communal = 'Communal',
+  Clothes = 'Clothes',
+  MedicalServices = 'Medical services',
+  Gift = 'Gift',
+  Other = 'Other',
+}
