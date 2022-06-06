@@ -5,11 +5,7 @@ import {useSelector} from 'react-redux';
 import {selectExpenseData} from '../../store/selectors';
 import {Expense} from '../../enums/Expense';
 import {getCategoryValue} from '../../utils';
-
-export type ChartExpenseType = {
-  x: string;
-  y: number;
-};
+import {ChartExpenseType} from './type';
 
 const arrayExpenseEnums = (
   Object.keys(Expense) as Array<keyof typeof Expense>
