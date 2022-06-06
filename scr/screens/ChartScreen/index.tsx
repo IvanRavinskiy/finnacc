@@ -1,24 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {View} from 'react-native';
 import {VictoryPie} from 'victory-native';
 import {useSelector} from 'react-redux';
 import {selectExpenseData} from '../../store/selectors';
 import {Expense} from '../../enums/Expense';
+import {getCategoryValue} from '../../utils';
+
+export type ChartExpenseType = {
+  x: string;
+  y: number;
+};
+
+const arrayExpenseEnums = (
+  Object.keys(Expense) as Array<keyof typeof Expense>
+).map(key => key);
 
 export const Chart = () => {
   const expenses = useSelector(selectExpenseData);
 
-  const getCategoryValue = (category: string) => {
-    return expenses.reduce((acc, expense) => {
-      if (expense.category === category) {
-        return acc + Number(expense.value);
-      }
-
-      return acc;
-    }, 0);
-  };
-
-  const [data, setData] = useState([
+  const [data, setData] = useState<ChartExpenseType[]>([
     {x: Expense.Food, y: 0},
     {x: Expense.Car, y: 0},
     {x: Expense.Pharmacy, y: 0},
@@ -36,31 +36,35 @@ export const Chart = () => {
     {x: Expense.Other, y: 0},
   ]);
 
+  const withPositiveValueData = useMemo(
+    () =>
+      arrayExpenseEnums
+        .map((expense: string) => {
+          const positiveValueCurrentCategory = getCategoryValue(
+            expenses,
+            expense,
+          );
+
+          if (positiveValueCurrentCategory > 0) {
+            return {
+              x: expense,
+              y: getCategoryValue(expenses, expense),
+            };
+          }
+          return {
+            x: expense,
+            y: 0,
+          };
+        })
+        .filter(el => el.y > 0),
+    [expenses],
+  );
+
   useEffect(() => {
-    setData([
-      {x: Expense.Food, y: getCategoryValue(Expense.Food)},
-      {x: Expense.Car, y: getCategoryValue(Expense.Car)},
-      {x: Expense.Pharmacy, y: getCategoryValue(Expense.Pharmacy)},
-      {x: Expense.Service, y: getCategoryValue(Expense.Service)},
-      {x: Expense.Baby, y: getCategoryValue(Expense.Baby)},
-      {
-        x: Expense.HouseholdChemicals,
-        y: getCategoryValue(Expense.HouseholdChemicals),
-      },
-      {x: Expense.Appliances, y: getCategoryValue(Expense.Appliances)},
-      {x: Expense.Cafe, y: getCategoryValue(Expense.Cafe)},
-      {x: Expense.Entertainment, y: getCategoryValue(Expense.Entertainment)},
-      {x: Expense.Traffic, y: getCategoryValue(Expense.Traffic)},
-      {x: Expense.Communal, y: getCategoryValue(Expense.Communal)},
-      {x: Expense.Clothes, y: getCategoryValue(Expense.Clothes)},
-      {
-        x: Expense.MedicalServices,
-        y: getCategoryValue(Expense.MedicalServices),
-      },
-      {x: Expense.Gift, y: getCategoryValue(Expense.Gift)},
-      {x: Expense.Other, y: getCategoryValue(Expense.Other)},
-    ]);
-  }, [expenses]);
+    if (withPositiveValueData) {
+      setData(withPositiveValueData);
+    }
+  }, [withPositiveValueData]);
 
   return (
     <View>
