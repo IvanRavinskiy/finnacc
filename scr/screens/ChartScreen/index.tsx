@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, SafeAreaView} from 'react-native';
 
 export const Chart = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Chart</Text>
-    </View>
+    </SafeAreaView>
   );
 };

@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {Header} from '../Header';
 import {HeaderContainerProps} from './type';
 
 export const HeaderContainer: FC<HeaderContainerProps> = ({children}) => {
   return (
-    <View>
+    <SafeAreaView>
       <Header />
       {children}
-    </View>
+    </SafeAreaView>
   );
 };
