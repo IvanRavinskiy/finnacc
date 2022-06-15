@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView} from 'react-native';
+import {FlatList} from 'react-native';
 import {Expense} from '../../components/Expense';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectExpenseData, selectLoader} from '../../store/selectors';
@@ -22,23 +22,36 @@ export const Home = () => {
     return <Loader />;
   }
 
+  const renderExpense = ({item}: any) => (
+    <Expense
+      id={item.id}
+      date={item.currentDate}
+      title={item.category}
+      value={item.value}
+    />
+  );
+
   return (
     <HeaderContainer>
-      <ScrollView>
-        {expenses.map(expense => {
-          const {category, value, currentDate, id} = expense;
-
-          return (
-            <Expense
-              key={id}
-              id={id}
-              date={currentDate}
-              title={category}
-              value={value}
-            />
-          );
-        })}
-      </ScrollView>
+      <FlatList
+        data={expenses}
+        renderItem={renderExpense}
+        keyExtractor={item => item.id}
+      />
+      {/*<ScrollView>*/}
+      {/*{expenses.map(expense => {*/}
+      {/*  const {category, value, currentDate, id} = expense;*/}
+      {/*  return (*/}
+      {/*    <Expense*/}
+      {/*      key={id}*/}
+      {/*      id={id}*/}
+      {/*      date={currentDate}*/}
+      {/*      title={category}*/}
+      {/*      value={value}*/}
+      {/*    />*/}
+      {/*  );*/}
+      {/*})}*/}
+      {/*</ScrollView>*/}
     </HeaderContainer>
   );
 };
