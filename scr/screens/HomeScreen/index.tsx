@@ -6,6 +6,7 @@ import {selectExpenseData, selectLoader} from '../../store/selectors';
 import {HeaderContainer} from '../../components/HeaderContainer';
 import {getDatabaseAC} from '../../store/actions/expensesSagaActions';
 import {Loader} from '../../components/Loader';
+import {ExpenseItemType} from '../../store/reducers/expenseSlice/types';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -22,14 +23,16 @@ export const Home = () => {
     return <Loader />;
   }
 
-  const renderExpense = ({item}: any) => (
-    <Expense
-      id={item.id}
-      date={item.currentDate}
-      title={item.category}
-      value={item.value}
-    />
-  );
+  const renderExpense = ({item}: {item: ExpenseItemType}) => {
+    return (
+      <Expense
+        id={item.id}
+        date={item.currentDate}
+        title={item.category}
+        value={item.value}
+      />
+    );
+  };
 
   return (
     <HeaderContainer>
@@ -38,20 +41,6 @@ export const Home = () => {
         renderItem={renderExpense}
         keyExtractor={item => item.id}
       />
-      {/*<ScrollView>*/}
-      {/*{expenses.map(expense => {*/}
-      {/*  const {category, value, currentDate, id} = expense;*/}
-      {/*  return (*/}
-      {/*    <Expense*/}
-      {/*      key={id}*/}
-      {/*      id={id}*/}
-      {/*      date={currentDate}*/}
-      {/*      title={category}*/}
-      {/*      value={value}*/}
-      {/*    />*/}
-      {/*  );*/}
-      {/*})}*/}
-      {/*</ScrollView>*/}
     </HeaderContainer>
   );
 };
